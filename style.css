@@ -82,13 +82,10 @@ li{
 
 }
 
-.li-background{
-    background-image: url(images/icon-cross.svg);
-    background-repeat: no-repeat;
-    background-position-x: 30rem;
-    background-position-y: 2rem;
-    background-size: 1.19rem 1.19rem;
-   
+.image-style{
+    width: 1.19rem;
+    height: 1.19rem;
+   cursor: pointer;
 }
 
 
@@ -240,12 +237,6 @@ input[type="checkbox"]:checked {
     background: #25273D;
     color: #C8CBE7;
     box-shadow: none;
-    background-image: url(images/Combined\ Shape.png);
-    background-repeat: no-repeat;
-    background-position-x: 30rem;
-    background-position-y: 2rem;
-    background-size: 1.16rem 1.16rem;
-    cursor: pointer;
 }
 
 .all-active-dark{
@@ -257,7 +248,12 @@ input[type="checkbox"]:checked {
     box-shadow: none;
 }
 
-
+.Completed{
+    cursor: pointer;
+}
+.all{
+    cursor: pointer;
+}
 @media only screen and (min-width: 1440px){
 
     body{

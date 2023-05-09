@@ -1,0 +1,373 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html{
+  font-size: 10px;
+}
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Josefin Sans';
+  background-image: url(images/bg-mobile-light.jpg);
+  background-repeat: no-repeat;
+  flex-direction: column;
+  background-position: top;
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+  background-color: #FAFAFA; 
+}
+
+.logo{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4.8rem; 
+  width: 32.5rem;
+  height: 2rem;
+  margin-bottom: 4rem;  
+}
+.moon{
+  cursor: pointer;
+}
+.icons{
+  cursor: pointer;
+}
+.sun{
+  cursor: pointer;
+  display: none;
+}
+.input{
+  width: 32.7rem;
+  height: 4.8rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-left: 2rem;
+  margin-bottom: 1.6rem;
+  margin-top: 0.1rem;
+
+  border-style: none;
+  background: #FFFFFF;
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 0.5rem;
+  
+  font-family: 'Josefin sans';
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  letter-spacing: -0.166667px;
+  color: #9495A5;
+}
+
+
+
+li{
+  width: 32.7rem;
+  height: 4.8rem;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  border-style: none;
+  margin-top: 0.1rem;
+
+  background-color: #FFFFFF;
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 0.5rem;
+
+}
+
+.li-background{
+  background-image: url(images/icon-cross.svg);
+  background-repeat: no-repeat;
+  background-position-x: 30rem;
+  background-position-y: 2rem;
+  background-size: 1.19rem 1.19rem;
+ 
+}
+
+
+
+span{
+  margin-left: 1.2rem;
+  font-family: 'Josefin sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  letter-spacing: -0.166667px;
+  width: 25rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+}
+
+
+.all-active, .Clear{
+  width: 32.7rem;
+  height: 4.8rem;
+
+  padding-left: 2rem;
+  padding-right: 1.6rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ 
+
+  background: #FFFFFF;
+  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
+  border-radius: 0.5rem;  
+}
+
+
+.Clear{
+  margin-top: 0.1rem;
+  justify-content: space-between;
+}
+.Clear{
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  /* identical to box height */
+
+  text-align: right;
+  letter-spacing: -0.166667px;
+
+  color: #9495A5;
+}
+
+input[type="checkbox"]{
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-left: 2rem;
+  border-radius: 50%;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+  border: solid 0.05rem lightgray;
+}
+
+input[type="checkbox"]:checked {
+cursor: pointer;
+  -webkit-appearance: none;
+  
+ 
+ background-repeat: no-repeat;
+ color: transparent;
+  background-position: center;
+  background-image: url(images/icon-check.svg), linear-gradient(135deg, #55DDFF 0%, #C058F3 100%);
+  border-radius: 50%;
+  border: none;
+  height: 2rem;
+  width: 2rem;
+}
+
+
+
+.clr{
+  cursor: pointer;
+}
+.all-active{
+  margin-top: 1.6rem;
+  justify-content: center;
+}
+.act{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center; 
+  width: 16rem;
+  height: 1.8rem;
+
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height */
+  
+  letter-spacing: -0.194444px;
+  
+  color: #9495A5;
+}
+
+.active, .completed{
+  cursor: pointer;
+}
+.btn{
+  display: none;
+}
+.drag{
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  /* identical to box height */
+
+  text-align: center;
+  letter-spacing: -0.194444px;
+
+  color: #9495A5;
+  margin-top: 4rem;
+}
+
+.line{
+  text-decoration-line: line-through;
+  color: #D1D2DA;
+}
+
+/*dark mode */
+.moon-dark{
+  display: none;
+}
+.sun-light{
+  display: flex;
+}
+.dark-body{
+  background-image: url(images/bg-mobile-dark.jpg);
+  background-color: #171823; 
+  box-shadow: none;
+}
+.input-dark{
+  background: #25273D;
+  color: #767992;  
+  box-shadow: none; 
+}
+.li-dark{
+  background: #25273D;
+  color: #C8CBE7;
+  box-shadow: none;
+  background-image: url(images/Combined\ Shape.png);
+  background-repeat: no-repeat;
+  background-position-x: 30rem;
+  background-position-y: 2rem;
+  background-size: 1.16rem 1.16rem;
+  cursor: pointer;
+}
+
+.all-active-dark{
+  background: #25273D;
+  box-shadow: none;
+}
+.Clear-dark{
+  background: #25273D;
+  box-shadow: none;
+}
+
+
+@media only screen and (min-width: 1440px){
+
+  body{
+
+  background-image: url(images/bg-desktop-light.jpg);
+}
+  .logo{
+      
+      width: 54rem;
+      height: 4rem;
+      margin-top: 7rem;
+      margin-bottom: 4.8rem;
+  }
+
+  .input{
+      width: 54rem;
+      height: 6.4rem;
+  
+
+  
+      padding-left: 2.4rem;
+      margin-bottom: 1.4rem;
+      
+     
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      letter-spacing: -0.25px;
+  }
+  
+  
+  
+  li{
+      width: 54rem;
+      height: 6.4rem;
+  
+  
+      padding-left: 1rem;
+      margin-top: 0.1rem;
+  
+  }
+  .li-background{
+      margin-left: 0;
+      background-position-x: 50rem;
+      background-position-y: 2.2rem;
+      background-size: 1.7rem 1.7rem;
+  }
+  
+  
+  span{
+      margin-left: 2.4rem;
+      font-size: 1.8rem;
+      line-height: 1.8rem;
+      letter-spacing: -0.166667px;
+      width: 41rem;
+      height: 6.4rem;
+  }
+  
+  .Clear{
+      display: flex;
+  }
+   .Clear{
+      width: 54rem;
+      height: 6.4rem;
+  
+      padding-left: 2.4rem;
+      padding-right: 2.4rem;
+  
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+     
+  }
+  .all-active{
+      margin-top: -6.2rem;
+      background: none;
+      width: 30rem;
+      height: 6.4rem;
+  }
+
+  input[type="checkbox"]{
+      height: 2.5rem;
+      width: 2.5rem;
+  }
+  
+  input[type="checkbox"]:checked {
+    
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+    .dark-body{
+      background-image: url(images/bg-desktop-dark.jpg);
+      background-color: #171823; 
+      box-shadow: none;
+
+
+  }
+
+  .li-dark{
+
+      background-position-x: 50rem;
+      background-position-y: 2.2rem;
+      background-size: 1.7rem 1.7rem;
+
+  }
+};
