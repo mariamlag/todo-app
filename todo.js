@@ -13,6 +13,7 @@ const sum = document.getElementById("sum");
 const complet = document.getElementById("complet");
 const active = document.getElementById("Active");
 const allTodo = document.getElementById("All");
+let dragedItem = null;
 let todo;
 let tasks = [];
 
@@ -26,46 +27,55 @@ input.addEventListener("keypress", function(event) {
             todo: input.value,
             completed: false,
           }
-          
           tasks.push(todo);
-          console.log(todo);
-          console.log(tasks);
+          localStorage.setItem("tasks", JSON.stringify(tasks));
            addTodo(todo);
            sum.textContent = tasks.length+" items left";
         } 
-
   }
- 
 });
 
 function addTodo(todo){
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
+  checkbox.checked = todo.completed;
+
   const span = document.createElement('span');
+  span.textContent = todo.todo;
   var li = document.createElement('li');
+  li.draggable = true;
   var image = document.createElement('img');
   image.src='./images/icon-cross.svg';
   // const image = document.createElement("image")
-  console.log("mariam");
   //daematos lis x ghilaki
   image.classList.add('image-style');
   
-  //checkbox daklikebit vcvlit da vusvamt xazs tu monishnulia, tu ar aris vashorebt
-  checkbox.addEventListener('change', (event) => {
-      const spanFromParen = event.target.parentNode.querySelector('span');
-      if (event.target.checked) {
-          spanFromParen.classList.add('line');  
-      } else {
-          spanFromParen.classList.remove('line');
-      }
-      todo.completed = !todo.completed; 
-
-      console.log(tasks);
+  
+  li.addEventListener("dragstart", (event) => {
+    dragedItem = event.currentTarget;
+  });
+  li.addEventListener("dragend", () =>{
+    dragedItem = null;
   });
 
-  span.textContent = todo.todo;
+  //checkbox daklikebit vcvlit da vusvamt xazs tu monishnulia, tu ar aris vashorebt
+  checkbox.addEventListener('change', () => {
+    todo.completed = !todo.completed; 
+      if (todo.completed) {
+          span.classList.add('line');  
+      } else {
+          span.classList.remove('line');
+      }
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+  });
 
+  if(todo.completed) {
+      span.classList.add('line');  
+    } else {
+      span.classList.remove('line');
+    };
 
+  // span.textContent = todo.todo;
   li.appendChild(checkbox);
   li.appendChild(span);
   ul.appendChild(li);
@@ -81,82 +91,61 @@ function addTodo(todo){
   input.value = ' ';
   input.focus();
 
+  //buttons 
+
   clear.addEventListener("click", () => {
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-    // abrunebs im yvela elements romelic monishnulia checked
-    checkboxes.forEach((checkbox) => {
-      const li = checkbox.parentNode;
-      li.remove();
-    });
+    tasks = tasks.filter(task => task.completed === false);
+    removeListElement();
+    tasks.forEach(addTodo);
+    sum.textContent = tasks.length + " items left";
+    localStorage.setItem("tasks", JSON.stringify(tasks));
   });
-
-
-//this is completed button, for to show completed todo list
 
   complet.addEventListener("click", () => {
     const completed = tasks.filter(task => task.completed === true);
-    while(ul.firstChild){
-      ul.removeChild(ul.firstChild);
-    };
+    removeListElement();
     completed.forEach(addTodo);
-    console.log(completed);
-
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-    checkboxes.forEach(button => {
-      button.addEventListener("change", () => {
-        localStorage.setItem("radioButtonState", button.checked);
-      });
-    });
-    const storedRadioButtonState = localStorage.getItem("radioButtonState");
-    if (storedRadioButtonState === "true") {
-      checkboxes.forEach(button => {
-        button.checked = JSON.parse(storedRadioButtonState);
-      });
-    };
-
     sum.textContent = tasks.length-completed.length + " items left";
   });
 
-  //active button, this show active todo list not completed
   active.addEventListener("click", () => {
     const actives = tasks.filter(task => task.completed === false);
-    while(ul.firstChild){
-      ul.removeChild(ul.firstChild);
-    };
+    removeListElement();
     actives.forEach(addTodo);
-    sum.textContent = tasks.length-(tasks.length-actives.length)+ " items left";
-    console.log(actives);
+    sum.textContent = actives.length+ " items left";
   });
-
 
   allTodo.addEventListener("click", () => {
     const allDo = tasks.filter(task => task.completed === false || task.completed === true);
-    while(ul.firstChild){
-      ul.removeChild(ul.firstChild);
-    };
+    removeListElement();
     allDo.forEach(addTodo);
-
-    // const checkboxes = document.querySelectorAll("input[type='checkbox']");
-    // checkboxes.forEach(button => {
-    //   button.addEventListener("change", () => {
-    //     localStorage.setItem("radioButtonState", button.checked);
-    //   });
-    // });
-    // const storedRadioButtonState = localStorage.getItem("radioButtonState");
-    // if (storedRadioButtonState === "true") {
-    //   checkboxes.forEach(button => {
-    //     button.checked = JSON.parse(storedRadioButtonState);
-    //   });
-    // }
-
     sum.textContent = tasks.length+ " items left";
   });
 
+  function removeListElement (){
+    while(ul.firstChild){
+      ul.removeChild(ul.firstChild);
+    };
+  };
 
   image.addEventListener("click", () => {
       image.parentNode.remove();
+      let index = tasks.indexOf(todo);
+      tasks.splice(index, 1);
+      sum.textContent = tasks.length + " items left";
+      localStorage.setItem("tasks", JSON.stringify(tasks));
   });
-}
+
+
+};
+
+  const savedTasks = localStorage.getItem("tasks");
+  if (savedTasks) {
+    tasks = JSON.parse(savedTasks);
+    tasks.forEach(addTodo);
+    sum.textContent = tasks.length + " items left";
+  }
+
 //dark mode style chang
 
 darkMode.addEventListener("click", () => {
@@ -177,6 +166,23 @@ darkMode.addEventListener("click", () => {
         imageSun.classList.toggle("sun-light");
         
     };
-   
 });
 
+ul.addEventListener("dragover", (event) =>{
+  event.preventDefault();
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+});
+
+ul.addEventListener("drop", (event) =>{
+  event.preventDefault();
+  if(dragedItem === null) {
+    return;
+  };
+  const target = event.target.closest("li");
+  if (!target) {
+    ul.appendChild(dragedItem);
+  } else {
+    target.parentNode.insertBefore(dragedItem, target);
+  }
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+});
